@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PolyCalPal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The unofficial what's-happening board for Poly Prep nursery parents: today, this week, big dates, and what to wear.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B5FC7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='5' width='26' height='24' rx='5' fill='%232B5FC7'/%3E%3Crect x='3' y='5' width='26' height='8' rx='4' fill='%231E4A9E'/%3E%3Ccircle cx='16' cy='21' r='4' fill='%23F0B44C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+  :root {
+    --ground: #F4F6F9;
+    --panel: #FFFFFF;
+    --ink: #1E2A3E;
+    --muted: #5A6A82;
+    --line: #DCE3EC;
+    --accent: #2B5FC7;
+    --today: #C77E1A;
+    --today-soft: #FDF3DF;
+    --today-line: #F0D9AC;
+    --cat-school-ink: #2B5FC7;   --cat-school-soft: #E3EBFA;
+    --cat-closed-ink: #B23E52;   --cat-closed-soft: #F9E4E8;
+    --cat-community-ink: #2F7C54; --cat-community-soft: #DFF0E6;
+    --cat-reminder-ink: #96660D; --cat-reminder-soft: #F8ECD4;
+    --cat-arts-ink: #7A4FB3;     --cat-arts-soft: #EFE7F9;
+    --on-accent: #FFFFFF;
+    --banner-soft: #E9EFFB;
+    --banner-ink: #2B5FC7;
+    --display: "Baloo 2", "Avenir Next", "Trebuchet MS", sans-serif;
+    --body: "Nunito Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131A2B;
+      --panel: #1C2539;
+      --ink: #E9EDF5;
+      --muted: #94A2B9;
+      --line: #2C3752;
+      --accent: #7DA2F2;
+      --today: #E8B45C;
+      --today-soft: #322A18;
+      --today-line: #57472A;
+      --cat-school-ink: #93B1F4;   --cat-school-soft: #223252;
+      --cat-closed-ink: #EE93A4;   --cat-closed-soft: #43242E;
+      --cat-community-ink: #86CBA4; --cat-community-soft: #1F3A2C;
+      --cat-reminder-ink: #E3B762; --cat-reminder-soft: #3B3118;
+      --cat-arts-ink: #C6A5EE;     --cat-arts-soft: #322547;
+      --on-accent: #10192E;
+      --banner-soft: #22304E;
+      --banner-ink: #A9C0F5;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #131A2B;
+    --panel: #1C2539;
+    --ink: #E9EDF5;
+    --muted: #94A2B9;
+    --line: #2C3752;
+    --accent: #7DA2F2;
+    --today: #E8B45C;
+    --today-soft: #322A18;
+    --today-line: #57472A;
+    --cat-school-ink: #93B1F4;   --cat-school-soft: #223252;
+    --cat-closed-ink: #EE93A4;   --cat-closed-soft: #43242E;
+    --cat-community-ink: #86CBA4; --cat-community-soft: #1F3A2C;
+    --cat-reminder-ink: #E3B762; --cat-reminder-soft: #3B3118;
+    --cat-arts-ink: #C6A5EE;     --cat-arts-soft: #322547;
+    --on-accent: #10192E;
+    --banner-soft: #22304E;
+    --banner-ink: #A9C0F5;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
+
+  header { margin-bottom: 20px; }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .wordmark .pal { color: var(--accent); }
+  .tagline {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .dateline {
+    margin: 14px 0 0;
+    font-weight: 800;
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  section { margin-top: 30px; }
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+    margin: 0 0 10px;
+  }
+  .section-head h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .section-head .sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .card--today {
+    background: var(--today-soft);
+    border-color: var(--today-line);
+  }
+
+  .event {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    align-items: flex-start;
+  }
+  .event + .event { border-top: 1px solid var(--line); }
+  .card--today .event + .event { border-top-color: var(--today-line); }
+  .event-main { flex: 1; min-width: 0; }
+  .event-title {
+    font-weight: 800;
+    margin: 0;
+    font-size: 1rem;
+  }
+  .event-notes {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .event-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .event-time {
+    font-weight: 800;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .chip {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 2px 9px;
+    white-space: nowrap;
+  }
+  .chip--school    { background: var(--cat-school-soft);    color: var(--cat-school-ink); }
+  .chip--closed    { background: var(--cat-closed-soft);    color: var(--cat-closed-ink); }
+  .chip--community { background: var(--cat-community-soft); color: var(--cat-community-ink); }
+  .chip--reminder  { background: var(--cat-reminder-soft);  color: var(--cat-reminder-ink); }
+  .chip--arts      { background: var(--cat-arts-soft);      color: var(--cat-arts-ink); }
+  .chip--nursery   { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+
+  .empty {
+    padding: 16px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .day-group { margin-top: 14px; }
+  .day-label {
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bigdate {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 16px;
+  }
+  .bigdate + .bigdate { border-top: 1px solid var(--line); }
+  .date-tile {
+    flex-shrink: 0;
+    width: 52px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--ground);
+    padding: 5px 0 6px;
+    line-height: 1.15;
+  }
+  .date-tile .m {
+    display: block;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .date-tile .d {
+    display: block;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .bigdate-main { flex: 1; min-width: 0; }
+  .bigdate-title { font-weight: 800; margin: 0; font-size: 0.98rem; }
+  .bigdate-range { margin: 1px 0 0; color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+  .countdown {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .add-link {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 4px 0 4px 8px; /* generous tap target on touch screens */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .add-link:hover, .add-link:focus-visible { text-decoration: underline; }
+  .bigdate-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .sub-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 13px 16px;
+  }
+  .sub-row + .sub-row { border-top: 1px solid var(--line); }
+  .sub-main { flex: 1; min-width: 170px; }
+  .sub-name { font-weight: 800; margin: 0; font-size: 0.98rem; }
+  .sub-desc { margin: 1px 0 0; color: var(--muted); font-size: 0.85rem; }
+  .sub-actions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-block;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 0.82rem;
+    line-height: 1;
+    padding: 10px 15px;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1.5px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .phone-note {
+    margin: 10px 2px 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .wx-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 560px) {
+    .wx-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .wx-day {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wx-top { display: flex; align-items: center; gap: 12px; }
+  .wx-icon { width: 46px; height: 46px; flex-shrink: 0; }
+  .wx-when {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .wx-cond { margin: 0; font-weight: 800; font-size: 1rem; }
+  .wx-temps {
+    margin-left: auto;
+    text-align: right;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.55rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .wx-temps .lo { color: var(--muted); font-size: 1.05rem; }
+  .wx-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 0;
+    text-align: center;
+  }
+  .wx-slot + .wx-slot { border-left: 1px solid var(--line); }
+  .wx-slot .h {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .wx-slot .t { display: block; font-weight: 800; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .wx-slot .f { display: block; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .wx-lead { margin: 0; font-weight: 800; font-size: 0.95rem; }
+  .wx-lead .wear-label { color: var(--accent); }
+  .wx-extras { margin: 6px 0 0; padding-left: 18px; font-size: 0.9rem; color: var(--ink); }
+  .wx-extras li + li { margin-top: 2px; }
+
+  .info { padding: 14px 16px; }
+  .info + .info { border-top: 1px solid var(--line); }
+  .info h3 {
+    margin: 0 0 3px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .info p { margin: 0; font-size: 0.93rem; }
+
+  .link-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .link-row + .link-row { border-top: 1px solid var(--line); }
+  .link-name { font-weight: 800; font-size: 0.95rem; color: var(--accent); }
+  .link-row:hover .link-name, .link-row:focus-visible .link-name { text-decoration: underline; }
+  .link-desc { color: var(--muted); font-size: 0.85rem; }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer p { margin: 0 0 6px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    section, header { animation: rise 0.35s ease both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1 class="wordmark">PolyCal<span class="pal">Pal</span></h1>
+    <p class="tagline">The unofficial what&rsquo;s-happening board for Poly Prep nursery parents.</p>
+    <p class="dateline" id="dateline"></p>
+  </header>
+
+  <section id="weather-section" hidden>
+    <div class="section-head"><h2>Weather &amp; what to wear</h2><span class="sub" id="weather-sub"></span></div>
+    <div class="wx-grid" id="weather-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Today</h2><span class="sub" id="today-sub"></span></div>
+    <div class="card card--today" id="today-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Tomorrow</h2><span class="sub" id="tomorrow-sub"></span></div>
+    <div class="card" id="tomorrow-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Later this week</h2><span class="sub" id="week-sub"></span></div>
+    <div id="week-groups"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Big dates ahead</h2><span class="sub">closures, breaks &amp; milestones</span></div>
+    <div class="card" id="bigdates-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>On your phone</h2><span class="sub">auto-updating subscriptions</span></div>
+    <div class="card" id="subscribe-card"></div>
+    <p class="phone-note">Subscribe once and the school&rsquo;s official dates flow straight into your own
+      calendar app &mdash; new events and changes appear automatically, with your normal alerts.
+      The <strong>+&nbsp;Add</strong> link on any single event drops just that one into Google Calendar.
+      If a button doesn&rsquo;t work on your device, use <strong>Copy</strong> and paste the address into
+      your calendar app under &ldquo;Add subscription&rdquo; or &ldquo;From URL&rdquo;.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Good to know</h2><span class="sub">from official school communications</span></div>
+    <div class="card">
+      <div class="info">
+        <h3>The school day</h3>
+        <p>Arrival is <strong>8:15&ndash;8:30 AM</strong>; dismissal is outside between <strong>3:05 and 3:15 PM</strong>.
+          Arrivals after 8:30 sign in for a late pass and join class at 8:40.
+          <strong>Nursery Mornings</strong> (half day) dismissal is <strong>12:10&ndash;12:15 PM</strong> &mdash;
+          at the side gate on dry days, the main entrance when it rains.</p>
+      </div>
+      <div class="info">
+        <h3>Nursery A daily rhythm</h3>
+        <p>Morning drop-off routine: backpack &amp; jacket in the cubby, water bottle on the fridge
+          (snack on the counter), a bathroom try and hand-wash, then answer the question of the day.
+          Keep <strong>extra clothes, rain boots &amp; a rain jacket</strong> in the cubby, and send a blanket,
+          crib sheet, or small stuffed animal if your child stays for rest time. Email
+          <strong>both Ms.&nbsp;Katherine and Ms.&nbsp;EJ</strong> so messages are seen quickly, and keep
+          dismissal plans up to date in the <strong>PickUp Patrol</strong> app.</p>
+      </div>
+      <div class="info">
+        <h3>After school &amp; half-day nursery</h3>
+        <p>Half-day nursery kids aren&rsquo;t eligible for after school, and the school suggests holding
+          off on nursery after-school until after December.</p>
+      </div>
+      <div class="info">
+        <h3>Bus notes</h3>
+        <p>No bus home for Nursery Mornings (half day). Nursery &amp; Pre-K riders use school-provided
+          booster seats, and children must be met at their stop by an authorized adult.
+          Questions: lsbus@polyprep.org.</p>
+      </div>
+      <div class="info">
+        <h3>When your kid is sick</h3>
+        <p>Email <strong>LSAbsences@polyprep.org</strong> and CC the teacher. Keep them home for a fever of
+          100.4&deg;F+, vomiting or diarrhea (24 hours symptom-free before returning), live lice, or unusual
+          rashes. An absence longer than two days needs written communication to return.</p>
+      </div>
+      <div class="info">
+        <h3>Picture days</h3>
+        <p>Makeup Picture Day is <strong>Jan 8</strong>, and sibling photos are taken then too.
+          The backdrop is &ldquo;Regal Blue,&rdquo; so plan outfits accordingly.</p>
+      </div>
+      <div class="info">
+        <h3>Birthday goodie bags</h3>
+        <p>Send sparingly, and they must not contain candy or any food. The school suggests stickers,
+          pencils, bookmarks, or erasers.</p>
+      </div>
+      <div class="info">
+        <h3>Who to ask</h3>
+        <p>Poly PM &amp; after school: Nathaniel Meek (nmeek@polyprep.org) &middot;
+          Student concerns, Nursery&ndash;Grade 3: Kimberly Davis Rivizzigno &middot;
+          Nurse &amp; absences: LSAbsences@polyprep.org &middot; Bus: lsbus@polyprep.org</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Handy links</h2></div>
+    <div class="card">
+      <a class="link-row" href="https://portals.veracross.com/polyprep/parent/pages/ls" target="_blank" rel="noopener">
+        <span class="link-name">Lower School Portal</span>
+        <span class="link-desc">Weekly Bulletin &amp; Pulse announcements</span>
+      </a>
+      <a class="link-row" href="https://portals.veracross.com/polyprep/parent/pages/lspm" target="_blank" rel="noopener">
+        <span class="link-name">Poly PM page</span>
+        <span class="link-desc">After care &amp; enrichment info on the Portal</span>
+      </a>
+      <a class="link-row" href="https://polylower.campbrainregistration.com/" target="_blank" rel="noopener">
+        <span class="link-name">Poly PM registration</span>
+        <span class="link-desc">Create an account &amp; sign up for enrichment</span>
+      </a>
+      <a class="link-row" href="https://sites.google.com/polyprep.org/nurserya/home" target="_blank" rel="noopener">
+        <span class="link-name">Nursery A class site</span>
+        <span class="link-desc">Weekly updates &amp; photos from Ms. Katherine &amp; Ms. EJ</span>
+      </a>
+      <a class="link-row" href="https://app.pickuppatrol.net/parents/" target="_blank" rel="noopener">
+        <span class="link-name">PickUp Patrol</span>
+        <span class="link-desc">Update your child&rsquo;s dismissal plan for the day</span>
+      </a>
+      <a class="link-row" href="https://docs.google.com/presentation/d/e/2PACX-1vQqCx_zZ8NkON7TNrVQ75xGiLLCky8ka4EGD9Nr-sFWiZurUAVqYYDvlL0TezRcrTXI-fA5rAzha82K/pub" target="_blank" rel="noopener">
+        <span class="link-name">Lower School 2026&ndash;27 Update</span>
+        <span class="link-desc">The full deck from the Head of Lower School</span>
+      </a>
+      <a class="link-row" href="https://www.polyprep.org/holidaypolicy" target="_blank" rel="noopener">
+        <span class="link-name">Holiday policy</span>
+        <span class="link-desc">How Poly handles religious &amp; cultural holidays</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made by parents, for parents. Not affiliated with or endorsed by Poly Prep.</p>
+    <p>Always confirm dates and times against official school communications.</p>
+    <p id="synced"></p>
+  </footer>
+</div>
+
+<script>
+  // ============================================================
+  // THE CALENDAR — edit this list; the page sorts everything
+  // into Today / Tomorrow / This week / Big dates by itself.
+  //
+  // Each event:
+  //   date:     "YYYY-MM-DD"           (required)
+  //   endDate:  "YYYY-MM-DD"           (optional, for multi-day)
+  //   title:    "..."                  (required)
+  //   category: school | closed | community | reminder
+  //   time:     "8:30 AM"              (optional)
+  //   notes:    "..."                  (optional)
+  //   big:      true                   (optional — shows in Big dates ahead)
+  // ============================================================
+  // Parent-added events — playdates, socials, anything not on official feeds.
+  // The sync script NEVER touches this list; edit it freely.
+  const MANUAL_EVENTS = [
+  ];
+
+  // Curated from official school sources the feeds don't cover:
+  //  - "Openings & Closings 2026-27" PDF (as of Jan 12, 2026)
+  //  - "LS Calendar in List Format: Community Events" sheet (updated 8/12/2026)
+  //  - "2026-2027 Lower School Update" deck from the Head of Lower School
+  // Single-grade K-4 events are intentionally left out; nursery, Pre-K,
+  // and all-school events stay. `replaces: "text"` removes the feed's own
+  // version of the same event (matched by start date + title substring).
+  // When a sync warns of overlap, re-check this list for duplicates.
+  const EXTRA_EVENTS = [
+    { date: "2026-08-20", title: "Athletics Preseason Begins", category: "school",
+      notes: "Middle & Upper School athletics" },
+    { date: "2026-08-26", title: "Nursery to Kindergarten Play Date", time: "10:00 AM",
+      category: "school", nursery: true, replaces: "Play Date",
+      notes: "Not rescheduled in case of rain" },
+    { date: "2026-09-08", title: "First Day of School — Noon Dismissal", category: "school", big: true,
+      nursery: true, replaces: "Opening Day",
+      notes: "Half day for Lower School, no lunch service. Optional paid afternoon camp for Pre-K–Grade 4 (register on the portal)" },
+    { date: "2026-09-08", endDate: "2026-09-11", title: "Nursery Adjustment Schedule", category: "school",
+      big: true, nursery: true, replaces: "Nursery Adjustment",
+      notes: "Nursery follows its own gentle ramp-up schedule this week; no bus home" },
+    { date: "2026-09-11", title: "Welcome Assembly Community Time", time: "8:45 AM", category: "school" },
+    { date: "2026-09-11", title: "LS Lice Check", category: "reminder" },
+    { date: "2026-09-14", title: "School Pictures Day (Dance Studio)", category: "school",
+      replaces: "Pictures Day",
+      notes: "Backdrop is “Regal Blue” — sibling photos are taken on Makeup Picture Day, Jan 8" },
+    { date: "2026-10-17", title: "Pumpkin Patch (during Homecoming)", time: "11:00 AM",
+      category: "community", big: true, notes: "11 AM–1 PM; Homecoming runs 10 AM–4 PM" },
+    { date: "2026-10-23", title: "El Mes de Herencia Latina Community Time", time: "8:45 AM", category: "school" },
+    { date: "2026-11-08", title: "Diwali", category: "reminder", notes: "Informational — school open" },
+    { date: "2026-12-04", title: "Native American Heritage Month Community Time", time: "8:45 AM", category: "school" },
+    { date: "2026-12-17", title: "Nursery Celebration of Learning", time: "8:45 AM",
+      category: "school", big: true, nursery: true },
+    { date: "2026-12-18", title: "Parranda Community Time", time: "8:45 AM", category: "school" },
+
+    { date: "2027-01-04", title: "Classes Resume — Welcome Back", category: "school", big: true,
+      notes: "Poly PM after care & enrichment resume too" },
+    { date: "2027-01-07", title: "Lice Check", category: "reminder" },
+    { date: "2027-01-08", title: "Makeup Picture Day", category: "school",
+      notes: "Sibling photos are taken today" },
+    { date: "2027-01-15", title: "Poly Pep! Day and Oasis Night", category: "school", big: true },
+    { date: "2027-01-18", title: "Martin Luther King Jr. Day (School Closed)", category: "closed", big: true },
+    { date: "2027-01-19", title: "All School Professional Day (No Classes, All Grades)", category: "closed", big: true },
+    { date: "2027-01-25", title: "Jammin' June & Poly Math Camp Registration Opens", category: "reminder" },
+    { date: "2027-01-25", endDate: "2027-02-05", title: "Food Drive", category: "school" },
+    { date: "2027-01-26", endDate: "2027-01-29", title: "Used Book Sale", category: "school",
+      notes: "Parent Shopping Day Jan 28, before & after school" },
+    { date: "2027-01-28", title: "LSPA January Meeting", time: "8:45 AM", category: "school" },
+    { date: "2027-01-29", title: "Jewish Heritage Month Community Time", time: "8:45 AM", category: "school" },
+
+    { date: "2027-02-05", title: "Lunar New Year begins at sundown", category: "reminder",
+      notes: "Regular classes; no After School, no practices/rehearsals, no late bus" },
+    { date: "2027-02-08", title: "Semester 1 reports posted to Parent Portal", category: "reminder" },
+    { date: "2027-02-15", title: "Presidents Day (School Closed)", category: "closed", big: true },
+    { date: "2027-02-16", title: "All School Professional Day (No Classes, All Grades)", category: "closed", big: true },
+    { date: "2027-02-19", title: "Spring Enrichment shared in Pulse", category: "reminder" },
+    { date: "2027-02-27", endDate: "2027-03-05", title: "Readathon", category: "school" },
+
+    { date: "2027-03-01", title: "Spring Enrichment Registration Opens", time: "10:30 AM", category: "reminder" },
+    { date: "2027-03-05", title: "LSPA March Meeting", time: "8:45 AM", category: "school" },
+    { date: "2027-03-05", title: "Dress Like a Book Character Day", category: "school", nursery: true },
+    { date: "2027-03-06", title: "PolyCultura", time: "1:00 PM", category: "community", big: true,
+      notes: "1–3 PM community festival" },
+    { date: "2027-03-08", title: "Eid al-Fitr begins at sundown", category: "reminder",
+      notes: "No After School today" },
+    { date: "2027-03-09", title: "Eid al-Fitr (School Closed)", category: "closed", big: true },
+    { date: "2027-03-10", endDate: "2027-03-11", title: "Lost & Found Recovery Days", category: "reminder" },
+    { date: "2027-03-12", title: "Last Day of School Before Spring Break", category: "school", big: true },
+    { date: "2027-03-15", endDate: "2027-03-26", title: "Spring Break (School Closed)", category: "closed", big: true,
+      notes: "Classes resume Monday March 29" },
+    { date: "2027-03-29", title: "Classes Resume — Spring Poly PM begins", category: "school", big: true },
+    { date: "2027-03-31", title: "Conference Sign-Ups shared by email", category: "reminder" },
+
+    { date: "2027-04-01", title: "Lice Check", category: "reminder" },
+    { date: "2027-04-05", endDate: "2027-04-08", title: "Pajama Drive", category: "school" },
+    { date: "2027-04-05", title: "Wear Pajamas to School Day", category: "school", nursery: true },
+    { date: "2027-04-08", title: "Women's History Oratory Contest Finale", time: "8:45 AM", category: "school" },
+    { date: "2027-04-08", title: "No After School — Spring Conferences", category: "reminder" },
+    { date: "2027-04-09", title: "Spring Conferences (School Closed)", category: "closed", big: true },
+    { date: "2027-04-12", title: "All School Professional Day (No Classes, All Grades)", category: "closed", big: true },
+    { date: "2027-04-13", title: "Pre-K Parent Preview (for current Nursery parents)", time: "12:00 PM",
+      category: "school", big: true, nursery: true, notes: "On Zoom; the link comes from the school's LS calendar" },
+    { date: "2027-04-16", title: "Arab Heritage Month Community Time", time: "8:45 AM", category: "school" },
+    { date: "2027-04-17", title: "Reunion", category: "school" },
+    { date: "2027-04-21", title: "Passover begins at sundown", category: "reminder",
+      notes: "Regular classes; no After School, no practices/rehearsals, no late bus" },
+    { date: "2027-04-22", title: "Passover (School Closed)", category: "closed", big: true },
+    { date: "2027-04-30", title: "Grandparents and Special Friends Day", time: "8:45 AM",
+      category: "school", big: true, notes: "8:45–11:45 AM" },
+
+    { date: "2027-05-03", endDate: "2027-05-07", title: "Teacher & Employee Appreciation Week", category: "school" },
+    { date: "2027-05-13", title: "Nursery, Pre-K & Kindergarten Carousel Day", time: "8:30 AM",
+      category: "school", big: true, nursery: true, notes: "8:30 AM–12:30 PM; rain date May 26" },
+    { date: "2027-05-15", title: "LS Packout Day", time: "9:00 AM", category: "reminder" },
+    { date: "2027-05-17", title: "Eid al-Adha (School Closed)", category: "closed", big: true },
+    { date: "2027-05-19", title: "End of Year Cocktail Reception", time: "6:00 PM", category: "community",
+      notes: "Adults" },
+    { date: "2027-05-25", title: "Caregiver Day", category: "school" },
+    { date: "2027-05-27", title: "POLY PM Showcase", time: "4:00 PM", category: "school" },
+    { date: "2027-05-28", title: "Senior Capstone & Lower School Professional Day (No Classes, Grades N–10)",
+      category: "closed", big: true },
+    { date: "2027-05-31", title: "Memorial Day (School Closed)", category: "closed", big: true },
+
+    { date: "2027-06-02", title: "POLY PM: Last Day of Spring Enrichment", category: "reminder" },
+    { date: "2027-06-03", title: "Open School Night — Noon Dismissal", category: "school", big: true },
+    { date: "2027-06-04", title: "Commencement (No Classes, All Grades)", category: "closed", big: true },
+    { date: "2027-06-08", title: "Changemaker Day", category: "school" },
+    { date: "2027-06-08", endDate: "2027-06-09", title: "Final Lost & Found Recovery Days", category: "reminder" },
+    { date: "2027-06-10", title: "Clapping Out & Grade 4 Graduation", time: "1:15 PM", category: "school", big: true },
+    { date: "2027-06-11", title: "Last Day of School — Noon Dismissal", category: "school", big: true,
+      notes: "End of Year Celebration Community Time at 11:15 AM" },
+    { date: "2027-06-12", title: "Poly Marches in Brooklyn Pride Parade", category: "community",
+      notes: "Evening — pending confirmation" },
+    { date: "2027-06-14", endDate: "2027-06-25", title: "Jammin' June & Poly Math Camp", category: "school",
+      notes: "Optional camp; closed June 18 (Juneteenth)" },
+  ];
+
+  // ===POLY-SYNC-START=== (everything between these markers is rewritten by sync-poly.js)
+  const LAST_SYNCED = "2026-10-24";
+  const FEED_EVENTS = [
+    {"date":"2026-08-05","title":"Poly PM Lower School Fall Enrichment Enrollment Opens","category":"school","time":"10:30 AM","notes":"Park Slope campus"},
+    {"date":"2026-08-25","title":"Lower School Welcome Back Zoom & Fall Q&A","category":"school","time":"6:00 PM","notes":"The Welcome Back Zoom and Fall Q&A is an opportunity to l... · Virtual"},
+    {"date":"2026-08-25","title":"Lower School Fall Placements shared in Portal","category":"school","time":"8:00 PM","notes":"Park Slope campus"},
+    {"date":"2026-08-26","title":"Nursery to Kindergarten Play Date","category":"school","time":"10:00 AM","notes":"Students in Nursery, Pre-K, and Kindergarten and their gr... · Park Slope campus","nursery":true},
+    {"date":"2026-09-03","title":"Lower School New Student Classroom Visits, Nursery to Gra...","category":"school","time":"10:00 AM","notes":"New students visit their classroom and meet their teacher... · Park Slope campus","nursery":true},
+    {"date":"2026-09-07","title":"Labor Day (School Closed)","category":"closed","big":true},
+    {"date":"2026-09-08","title":"Opening Day (Full Day for MS/US, Half Day for LS)","category":"school","time":"8:30 AM","notes":"Opening Day of School for all divisions. Half day for L...","big":true},
+    {"date":"2026-09-08","title":"Nursery Adjustment Schedule","category":"school","notes":"Nursery students follow a special adjustment schedule the... · Park Slope campus","big":true,"nursery":true},
+    {"date":"2026-09-10","title":"New Parent Orientation with HUGS Leadership","category":"school","time":"8:45 AM","notes":"New families meet the Lower School leadership team and HU... · Park Slope campus"},
+    {"date":"2026-09-11","title":"Rosh Hashanah begins at sundown. Regular classes in sessi...","category":"school"},
+    {"date":"2026-09-14","title":"Financial Aid Webinar for Current Families","category":"school","time":"7:30 PM","notes":"Current Families on Financial Aid hear about what to expe... · Virtual"},
+    {"date":"2026-09-14","title":"Nursery Regular Schedule begins","category":"school","time":"8:30 AM","notes":"Park Slope campus","big":true,"nursery":true},
+    {"date":"2026-09-14","title":"Lower School School Pictures Day (Dance Studio)","category":"school","time":"8:30 AM","notes":"A school photographer takes individual and class photos t... · Park Slope campus","big":true},
+    {"date":"2026-09-14","title":"Lower School Poly PM begins","category":"school","time":"3:15 PM","notes":"POLY PM's after care program begins. Please note that Enr... · Park Slope campus"},
+    {"date":"2026-09-15","title":"HUGs AAPI (Asian American and Pacific Islander) Parent So...","category":"school","time":"6:30 PM","notes":"Location: Parent home in Fort Greene (address to be discl... · Offsite"},
+    {"date":"2026-09-21","title":"Yom Kippur (School Closed)","category":"closed","big":true},
+    {"date":"2026-09-22","title":"Lower School Poly PM Enrichment & Music Conservatory Begins","category":"school","time":"3:15 PM","notes":"Enrichment classes and after school music lessons begin. ... · Park Slope campus"},
+    {"date":"2026-09-22","title":"Lower School Back to School Night & Reception (Adults Only)","category":"school","time":"5:45 PM","notes":"New and returning families meet teachers, learn about the... · Park Slope campus","big":true},
+    {"date":"2026-09-24","title":"United Voices September Meetings","category":"school","time":"3:45 PM","notes":"United Voices is a Lower School affinity group for studen... · Park Slope campus"},
+    {"date":"2026-09-25","title":"Blue Devil Night 2026","category":"school","time":"4:00 PM","notes":"The new school year kicks off with an all-school, whole-f... · Dyker Heights campus"},
+    {"date":"2026-09-29","title":"HUGS COM & HUGS LGBTQ+ Social","category":"school","time":"7:00 PM","notes":"Members of HUGS COM and HUGS LGBTQ+ enjoy a fall mixer fo... · Off-site"},
+    {"date":"2026-10-08","title":"LSPA October Meeting","category":"school","time":"8:45 AM","notes":"The Parents Assocation meets to support Lower School prog... · Park Slope campus"},
+    {"date":"2026-10-12","title":"Indigenous Peoples' Day, Columbus Day  (School Closed)","category":"closed","big":true},
+    {"date":"2026-10-13","title":"All School Professional Day 101326 (No Classes, All Grades)","category":"closed","big":true},
+    {"date":"2026-10-16","title":"Crazy Sock Day","category":"school","time":"8:30 AM","notes":"Lower School students wear crazy socks to school! · Park Slope campus"},
+    {"date":"2026-10-17","title":"Homecoming 2026","category":"school","time":"9:00 AM","notes":"Connect and celebrate with friends, teachers, alumni, on ... · Dyker Heights campus","big":true},
+    {"date":"2026-10-21","title":"Cancelled: State of the School  (Will be rescheduled)","category":"school","time":"6:00 PM","notes":"At Poly Prep, we aim to deliver the people, place, and pr...","big":true},
+    {"date":"2026-10-22","title":"Grade 3 and Grade 4 Healthy Choices Parent Coffee","category":"school","time":"8:45 AM","notes":"The Head of Lower School and the School Psychologist meet... · Park Slope campus"},
+    {"date":"2026-10-22","title":"United Voices October Meetings","category":"school","time":"3:45 PM","notes":"United Voices is a Lower School affinity group for studen... · Park Slope campus"},
+    {"date":"2026-10-23","title":"Snapshots shared in Parent Portal","category":"school","time":"4:00 PM","notes":"Brief snapshots of student progress are uploaded to verac... · Park Slope campus"},
+    {"date":"2026-10-23","title":"Grade 11/12 Play: The Curious Incident of the Dog in the ...","category":"arts","time":"7:00 PM","notes":"Follow Christopher, a mathematically gifted teenager with... · Dyker Heights campus"},
+    {"date":"2026-10-24","title":"Lower School Haunted House","category":"school","time":"5:00 PM","notes":"For one special night, the Lower School is converted into... · Park Slope campus"},
+    {"date":"2026-10-24","title":"Grade 11/12 Play: The Curious Incident of the Dog in the ...","category":"arts","time":"2:00 PM","notes":"Follow Christopher, a mathematically gifted teenager with... · Dyker Heights campus"},
+    {"date":"2026-10-29","title":"Grade 4 Movie Night: Inside Out 2","category":"school","time":"3:30 PM","notes":"Prior to the launch of our Healthy Choices workshops and ... · Park Slope campus"},
+    {"date":"2026-10-30","title":"Lower School Dress Up Day and Parade","category":"school","time":"8:40 AM","notes":"Students are invited to wear costumes to school. Parents ... · Park Slope campus"},
+    {"date":"2026-11-02","title":"All School Professional Day (No Classes, All Grades)","category":"closed","big":true},
+    {"date":"2026-11-03","title":"Solidarity Week","category":"school","time":"8:30 AM","notes":"Solidarity Week is dedicated to learning more about solid..."},
+    {"date":"2026-11-03","title":"Election Day 2026","category":"school"},
+    {"date":"2026-11-04","title":"Solidarity Week Celebration","category":"school","time":"9:50 AM"},
+    {"date":"2026-11-06","title":"Fall Conference Sign-Ups shared in Pulse","category":"school","notes":"Park Slope campus"},
+    {"date":"2026-11-06","title":"POLY PM Winter Enrichment Courses shared in Parent Portal","category":"school","notes":"Park Slope campus"},
+    {"date":"2026-11-11","title":"Veteran's Day Family Shares","category":"school","time":"8:30 AM","notes":"Lower School community members who served in the military... · Park Slope campus"},
+    {"date":"2026-11-11","title":"Grade 3 Fall ERB Milestones Administration (Nov 11-12)","category":"school","time":"8:30 AM","notes":"The Lower School administers the ERB Milestones assessmen... · Park Slope campus"},
+    {"date":"2026-11-13","title":"LSPA November Meeting","category":"school","time":"8:45 AM","notes":"The Parents Assocation meets to support Lower School prog... · Park Slope campus"},
+    {"date":"2026-11-13","title":"Grade 9/10 Play: Puffs (Day 1)","category":"arts","time":"7:00 PM","notes":"Follow Wayne, an ordinary and somewhat insecure student w... · Dyker Heights campus"},
+    {"date":"2026-11-14","title":"HUGS B&L Friendsgiving","category":"school","time":"6:00 PM","notes":"Members of HUGS Jewish Families enjoy a fall mixer. · Off-site"},
+    {"date":"2026-11-14","title":"Grade 9/10 Play: Puffs (Day 2)","category":"arts","time":"2:00 PM","notes":"Follow Wayne, an ordinary and somewhat insecure student w... · Dyker Heights campus"},
+    {"date":"2026-11-16","title":"Lower School December Drive Begins","category":"school","time":"8:30 AM","notes":"The Lower School community collects new toys and gently u... · Park Slope campus"},
+    {"date":"2026-11-16","title":"POLY PM Winter Enrichment Registration Opens","category":"school","time":"10:30 AM","notes":"Park Slope campus"},
+    {"date":"2026-11-17","title":"Grade 4 Fall ERB Milestones Administration (Nov 17-18)","category":"school","time":"8:30 AM","notes":"The Lower School administers the ERB Milestones assessmen... · Park Slope campus"},
+    {"date":"2026-11-17","title":"United Voices November Meetings","category":"school","time":"3:45 PM","notes":"United Voices is a Lower School affinity group for studen... · Park Slope campus"},
+    {"date":"2026-11-19","title":"Parent,Teacher Conferences: LS Only (Afternoon.   No Afte...","category":"closed","notes":"Park Slope campus","big":true},
+    {"date":"2026-11-23","title":"Family,Teacher Conferences:LS/MS/US (No Classes, All Grades)","category":"closed","time":"11:00 AM","big":true},
+    {"date":"2026-11-24","title":"Lower School Professional Day (No Classes Grades N-4)","category":"closed","notes":"Park Slope campus","big":true},
+    {"date":"2026-11-25","title":"Thanksgiving Break (School Closed)","category":"closed","big":true},
+    {"date":"2026-12-03","title":"Crazy Hat Day","category":"school","time":"8:30 AM","notes":"Lower School students wear crazy hats to school! · Park Slope campus"},
+    {"date":"2026-12-07","title":"Grade 4 Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus"},
+    {"date":"2026-12-08","title":"Grade 3 Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus"},
+    {"date":"2026-12-09","title":"Grade 2 Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus"},
+    {"date":"2026-12-10","title":"Grade 1 Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus"},
+    {"date":"2026-12-11","title":"Kindergarten Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus"},
+    {"date":"2026-12-11","title":"MS (Gr 7/8) Play: The Love of Three Oranges  (Day 1)","category":"arts","time":"7:00 PM","notes":"Enjoy this fast-paced, comedic fairy tale about a prince ... · Dyker Heights campus"},
+    {"date":"2026-12-11","title":"LS POLY PM: Last Day of Fall Enrichment","category":"school","notes":"Park Slope campus"},
+    {"date":"2026-12-12","title":"MS (Gr 7/8) Play: The Love of Three Oranges  (Day 2)","category":"arts","time":"2:00 PM","notes":"Enjoy this fast-paced, comedic fairy tale about a prince ... · Dyker Heights campus"},
+    {"date":"2026-12-14","title":"Pre-K Celebration of Learning","category":"school","time":"8:45 AM","notes":"Families celebrate the first semester of student learning... · Park Slope campus","nursery":true},
+    {"date":"2026-12-14","title":"United Voices December Meeting","category":"school","time":"3:45 PM","notes":"United Voices is a Lower School affinity group for studen... · Park Slope campus"},
+    {"date":"2026-12-14","title":"LS POLY PM: MakeUp Week for Fall Enrichment Courses (12/1...","category":"school","notes":"Park Slope campus"},
+    {"date":"2026-12-15","title":"Grade 3 Winter Concert","category":"school","time":"6:00 PM","notes":"Grade 3 students lead a rousing Winter concert for an aud... · Park Slope campus"},
+    {"date":"2026-12-16","title":"Winter Lost & Found Recovery Days","category":"school","time":"8:30 AM","notes":"Missing something? Throughout the year the Lower School e... · Park Slope campus"},
+    {"date":"2026-12-16","title":"Grade 4 Winter Concert","category":"school","time":"6:00 PM","notes":"Grade 4 students lead a rousing Winter concert for an aud... · Park Slope campus"},
+    {"date":"2026-12-17","title":"Winter Arts Festival, Art Show","category":"arts","time":"6:00 PM","notes":"Middle and Upper School Visual Arts students and faculty ... · Dyker Heights campus"},
+    {"date":"2026-12-17","title":"Winter Arts Festival, Music Concert","category":"arts","time":"7:00 PM","notes":"Middle and Upper School Visual Arts students and faculty ... · Dyker Heights campus"},
+    {"date":"2026-12-18","title":"Winter Vacation Begins (Students dismissed at noon)","category":"closed","big":true},
+  ];
+  // ===POLY-SYNC-END===
+
+  // ===WEATHER-SNAPSHOT-START=== (rewritten by sync-poly.js; used only when a live fetch is blocked)
+  const WEATHER_SNAPSHOT = {"fetched":"2026-10-24T12:07:46.364Z","digest":"2026-10-24:20:13:0:dry|2026-10-25:21:13:0:dry|2026-10-26:24:17:0:dry","daily":{"time":["2026-10-24","2026-10-25","2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30"],"weather_code":[3,0,0,3,3,3,1],"temperature_2m_max":[60.8,63.7,70.7,61.5,57.9,61.4,70.3],"temperature_2m_min":[39.4,39.6,50.5,52.6,50.5,51.6,52.8],"precipitation_probability_max":[0,0,0,0,0,1,1],"snowfall_sum":[0,0,0,0,0,0,0],"wind_speed_10m_max":[6.2,6.5,9.4,12,8.6,8.2,13.2],"uv_index_max":[3.8,4.15,4.2,4.15,4,3.75,3.7]},"hourly":{"time":["2026-10-24T00:00","2026-10-24T01:00","2026-10-24T02:00","2026-10-24T03:00","2026-10-24T04:00","2026-10-24T05:00","2026-10-24T06:00","2026-10-24T07:00","2026-10-24T08:00","2026-10-24T09:00","2026-10-24T10:00","2026-10-24T11:00","2026-10-24T12:00","2026-10-24T13:00","2026-10-24T14:00","2026-10-24T15:00","2026-10-24T16:00","2026-10-24T17:00","2026-10-24T18:00","2026-10-24T19:00","2026-10-24T20:00","2026-10-24T21:00","2026-10-24T22:00","2026-10-24T23:00","2026-10-25T00:00","2026-10-25T01:00","2026-10-25T02:00","2026-10-25T03:00","2026-10-25T04:00","2026-10-25T05:00","2026-10-25T06:00","2026-10-25T07:00","2026-10-25T08:00","2026-10-25T09:00","2026-10-25T10:00","2026-10-25T11:00","2026-10-25T12:00","2026-10-25T13:00","2026-10-25T14:00","2026-10-25T15:00","2026-10-25T16:00","2026-10-25T17:00","2026-10-25T18:00","2026-10-25T19:00","2026-10-25T20:00","2026-10-25T21:00","2026-10-25T22:00","2026-10-25T23:00","2026-10-26T00:00","2026-10-26T01:00","2026-10-26T02:00","2026-10-26T03:00","2026-10-26T04:00","2026-10-26T05:00","2026-10-26T06:00","2026-10-26T07:00","2026-10-26T08:00","2026-10-26T09:00","2026-10-26T10:00","2026-10-26T11:00","2026-10-26T12:00","2026-10-26T13:00","2026-10-26T14:00","2026-10-26T15:00","2026-10-26T16:00","2026-10-26T17:00","2026-10-26T18:00","2026-10-26T19:00","2026-10-26T20:00","2026-10-26T21:00","2026-10-26T22:00","2026-10-26T23:00","2026-10-27T00:00","2026-10-27T01:00","2026-10-27T02:00","2026-10-27T03:00","2026-10-27T04:00","2026-10-27T05:00","2026-10-27T06:00","2026-10-27T07:00","2026-10-27T08:00","2026-10-27T09:00","2026-10-27T10:00","2026-10-27T11:00","2026-10-27T12:00","2026-10-27T13:00","2026-10-27T14:00","2026-10-27T15:00","2026-10-27T16:00","2026-10-27T17:00","2026-10-27T18:00","2026-10-27T19:00","2026-10-27T20:00","2026-10-27T21:00","2026-10-27T22:00","2026-10-27T23:00","2026-10-28T00:00","2026-10-28T01:00","2026-10-28T02:00","2026-10-28T03:00","2026-10-28T04:00","2026-10-28T05:00","2026-10-28T06:00","2026-10-28T07:00","2026-10-28T08:00","2026-10-28T09:00","2026-10-28T10:00","2026-10-28T11:00","2026-10-28T12:00","2026-10-28T13:00","2026-10-28T14:00","2026-10-28T15:00","2026-10-28T16:00","2026-10-28T17:00","2026-10-28T18:00","2026-10-28T19:00","2026-10-28T20:00","2026-10-28T21:00","2026-10-28T22:00","2026-10-28T23:00","2026-10-29T00:00","2026-10-29T01:00","2026-10-29T02:00","2026-10-29T03:00","2026-10-29T04:00","2026-10-29T05:00","2026-10-29T06:00","2026-10-29T07:00","2026-10-29T08:00","2026-10-29T09:00","2026-10-29T10:00","2026-10-29T11:00","2026-10-29T12:00","2026-10-29T13:00","2026-10-29T14:00","2026-10-29T15:00","2026-10-29T16:00","2026-10-29T17:00","2026-10-29T18:00","2026-10-29T19:00","2026-10-29T20:00","2026-10-29T21:00","2026-10-29T22:00","2026-10-29T23:00","2026-10-30T00:00","2026-10-30T01:00","2026-10-30T02:00","2026-10-30T03:00","2026-10-30T04:00","2026-10-30T05:00","2026-10-30T06:00","2026-10-30T07:00","2026-10-30T08:00","2026-10-30T09:00","2026-10-30T10:00","2026-10-30T11:00","2026-10-30T12:00","2026-10-30T13:00","2026-10-30T14:00","2026-10-30T15:00","2026-10-30T16:00","2026-10-30T17:00","2026-10-30T18:00","2026-10-30T19:00","2026-10-30T20:00","2026-10-30T21:00","2026-10-30T22:00","2026-10-30T23:00"],"temperature_2m":[44.4,43.3,42.3,41.4,40.7,40,40.6,39.8,39.8,44.8,49.8,53.6,56.9,59.3,60.4,60.7,60.6,59.5,54.6,51.7,50.3,48.9,47.9,47.1,46,45.2,44.1,43.2,42.3,41.5,40.6,40,40,45,50.2,55,59,61.8,63,63.7,63.1,61.4,55.3,51.9,50.5,49.8,48.2,47.1,48.8,50.5,52.3,54,53.4,53,52.4,51.9,52.1,54.2,57.2,60.3,63.5,66.4,68.7,70.2,70.7,69.8,67.4,65.7,64.2,62.9,62.1,61.3,60.8,59.9,58.5,57.2,56.7,55.8,54.4,53.3,53.2,54,55.6,57.2,58.6,59.9,61,61.5,61.2,60.3,58.8,57.6,55.9,55.1,54.1,53.3,52.6,51.7,51.1,50.7,50.5,50.8,51.8,52.7,52.9,53.6,53.8,54.5,55.6,57.4,57.9,57.6,56.5,55.2,54.4,54.3,54.1,54,53.8,53.5,53.4,53.3,52.9,52.7,52.5,52.3,52,51.6,51.9,53.4,55.6,57.6,59.2,60.5,61.3,61.2,60.6,59.9,59.3,58.6,58,57.3,56.5,55.8,55.4,54.9,54.6,54.1,53.7,53.4,53.1,52.8,53.6,56.1,59.6,63,65.7,68.4,70,70.3,69.7,68.7,67.3,65.4,63.5,61.5,59.5,57.7],"apparent_temperature":[39.8,38.3,38.3,36.8,36.3,35.2,36.3,34.7,34.5,39.4,44.4,48.7,53.4,56.1,55.6,55.2,55.1,54,49,46.1,44.7,43.1,42.7,41.7,40.9,39.8,38.4,37,36.1,35.6,34.6,33.9,34,40.7,46,50.6,54.7,57.4,57.6,57.7,56.8,54.5,49.3,47,45.8,43.5,42.5,41.5,43.2,45,46.8,49,48.6,48.2,47.6,47.1,47.1,48.5,51.6,54.4,57.7,61,62.6,63.4,63.6,63.2,61.5,60.9,59.3,58.2,57.8,57,55.7,54.6,53.6,52.8,52.6,50.3,47.4,46.4,46.2,45.7,47.3,48.5,50.4,52.1,53,53,52.5,51.7,50.3,49.1,47.6,47.1,46.1,45.7,45.3,44.5,44.2,44.1,44.9,46.1,47.3,48,48.2,48.9,48.6,49.1,50.4,52.4,52,51.2,50.1,49.1,48.6,49,48.6,48.7,49.1,48.3,49,49,49,49.2,49.4,49.2,49,48.7,48.8,50.3,52.2,53.9,55,55.9,55.9,55.7,55.2,54.8,54.3,54.1,53.8,53.4,52.7,51.9,51.3,50.7,50.3,49.8,49.3,49.1,49,49,50.2,52.7,55.9,58.8,61.4,64,65.3,64.8,63.5,62.1,61.2,60.3,58.7,55.8,52.5,50],"precipitation_probability":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1],"weather_code":[0,0,0,0,0,0,3,2,0,0,0,1,0,2,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,2,2,3,3,2,1,1,3,3,3,2,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0]}};
+  // ===WEATHER-SNAPSHOT-END===
+
+  // Extra events can replace a feed event (same start date, title substring)
+  const replaced = FEED_EVENTS.filter(fe =>
+    !EXTRA_EVENTS.some(ex => ex.replaces && ex.date === fe.date &&
+      fe.title.toLowerCase().includes(ex.replaces.toLowerCase())));
+  const EVENTS = replaced.concat(EXTRA_EVENTS, MANUAL_EVENTS);
+
+  const CATS = {
+    school:    { label: "School" },
+    closed:    { label: "No school" },
+    community: { label: "Around town" },
+    reminder:  { label: "Reminder" },
+    arts:      { label: "Arts" },
+  };
+
+  // ---- date helpers (all local-time, no UTC surprises) ----
+  const DAY = 24 * 60 * 60 * 1000;
+  function parseLocal(s) {
+    const [y, m, d] = s.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  }
+  function addDays(d, n) {
+    const c = new Date(d);
+    c.setDate(c.getDate() + n);
+    return c;
+  }
+  function fmt(d, opts) { return d.toLocaleDateString("en-US", opts); }
+  function occursOn(ev, day) {
+    const s = parseLocal(ev.date);
+    const e = ev.endDate ? parseLocal(ev.endDate) : s;
+    return day >= s && day <= e;
+  }
+  function eventsOn(day) {
+    return EVENTS.filter(ev => occursOn(ev, day))
+      .sort((a, b) => (a.time ? 0 : 1) - (b.time ? 0 : 1));
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = addDays(today, 1);
+
+  // ---- rendering ----
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  }
+  function isoShift(iso, n) {
+    const d = parseLocal(iso);
+    d.setDate(d.getDate() + n);
+    const p = x => String(x).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+  function gcalUrl(ev) {
+    const basic = iso => iso.replace(/-/g, "");
+    const p = new URLSearchParams({ action: "TEMPLATE", text: ev.title, ctz: "America/New_York" });
+    if (ev.time) {
+      const m = ev.time.match(/(\d+):(\d+) (AM|PM)/);
+      let h = (+m[1] % 12) + (m[3] === "PM" ? 12 : 0);
+      const pad = x => String(x).padStart(2, "0");
+      const endH = Math.min(h + 1, 23);
+      p.set("dates", `${basic(ev.date)}T${pad(h)}${m[2]}00/${basic(ev.date)}T${pad(endH)}${m[2]}00`);
+    } else {
+      p.set("dates", `${basic(ev.date)}/${basic(isoShift(ev.endDate || ev.date, 1))}`);
+    }
+    if (ev.notes) p.set("details", ev.notes);
+    return "https://calendar.google.com/calendar/render?" + p.toString();
+  }
+  function addLink(ev) {
+    return `<a class="add-link" href="${esc(gcalUrl(ev))}" target="_blank" rel="noopener"
+      title="Add to Google Calendar">+ Add</a>`;
+  }
+  function eventRow(ev) {
+    const cat = CATS[ev.category] || { label: ev.category };
+    return `<div class="event">
+      <div class="event-main">
+        <p class="event-title">${esc(ev.title)}</p>
+        ${ev.notes ? `<p class="event-notes">${esc(ev.notes)}</p>` : ""}
+      </div>
+      <div class="event-meta">
+        ${ev.time ? `<span class="event-time">${esc(ev.time)}</span>` : ""}
+        <span class="chip chip--${esc(ev.category)}">${esc(cat.label)}</span>
+        ${ev.nursery ? `<span class="chip chip--nursery">&#9733; Nursery</span>` : ""}
+        ${addLink(ev)}
+      </div>
+    </div>`;
+  }
+  function fillCard(el, events, emptyMsg) {
+    el.innerHTML = events.length
+      ? events.map(eventRow).join("")
+      : `<div class="empty">${emptyMsg}</div>`;
+  }
+
+  document.getElementById("dateline").textContent =
+    fmt(today, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  if (LAST_SYNCED) {
+    const cov = EVENTS.map(e => e.endDate || e.date).sort().pop();
+    document.getElementById("synced").textContent =
+      `School dates come from Poly Prep's calendar feeds (synced ${fmt(parseLocal(LAST_SYNCED), { month: "long", day: "numeric", year: "numeric" })}) ` +
+      `and the official Openings & Closings 2026–27 calendar` +
+      (cov ? `, covering through ${fmt(parseLocal(cov), { month: "long", day: "numeric", year: "numeric" })}.` : ".");
+  }
+
+  document.getElementById("today-sub").textContent = fmt(today, { month: "short", day: "numeric" });
+  document.getElementById("tomorrow-sub").textContent = fmt(tomorrow, { weekday: "long", month: "short", day: "numeric" });
+
+  fillCard(document.getElementById("today-card"), eventsOn(today),
+    "Nothing on the calendar — a wide-open day.");
+  fillCard(document.getElementById("tomorrow-card"), eventsOn(tomorrow),
+    "Nothing scheduled for tomorrow.");
+
+  // Later this week: day after tomorrow through Sunday
+  // (if the week is nearly over, look through next Sunday instead)
+  let weekEnd = addDays(today, 7 - ((today.getDay() + 6) % 7) - 1); // this Sunday
+  if (weekEnd <= tomorrow) weekEnd = addDays(weekEnd, 7);
+  const weekStart = addDays(tomorrow, 1);
+  const groupsEl = document.getElementById("week-groups");
+  document.getElementById("week-sub").textContent =
+    weekStart <= weekEnd
+      ? `${fmt(weekStart, { month: "short", day: "numeric" })} – ${fmt(weekEnd, { month: "short", day: "numeric" })}`
+      : "";
+  let groups = "";
+  for (let d = weekStart; d <= weekEnd; d = addDays(d, 1)) {
+    const evs = eventsOn(d);
+    if (!evs.length) continue;
+    groups += `<div class="day-group">
+      <p class="day-label">${fmt(d, { weekday: "long" })} &middot; ${fmt(d, { month: "short", day: "numeric" })}</p>
+      <div class="card">${evs.map(eventRow).join("")}</div>
+    </div>`;
+  }
+  groupsEl.innerHTML = groups ||
+    `<div class="card"><div class="empty">A quiet rest of the week.</div></div>`;
+
+  // Big dates ahead
+  const big = EVENTS
+    .filter(ev => ev.big && (ev.endDate ? parseLocal(ev.endDate) : parseLocal(ev.date)) >= today)
+    .sort((a, b) => parseLocal(a.date) - parseLocal(b.date))
+    .slice(0, 10);
+  function countdown(ev) {
+    const s = parseLocal(ev.date);
+    const e = ev.endDate ? parseLocal(ev.endDate) : s;
+    if (s <= today && today <= e) return "now";
+    const n = Math.round((s - today) / DAY);
+    if (n === 1) return "tomorrow";
+    return `in ${n} days`;
+  }
+  function bigRow(ev) {
+    const s = parseLocal(ev.date);
+    const e = ev.endDate ? parseLocal(ev.endDate) : null;
+    const range = e
+      ? `${fmt(s, { weekday: "short", month: "short", day: "numeric" })} – ${fmt(e, { weekday: "short", month: "short", day: "numeric" })}`
+      : fmt(s, { weekday: "long", month: "short", day: "numeric" });
+    return `<div class="bigdate">
+      <div class="date-tile"><span class="m">${fmt(s, { month: "short" })}</span><span class="d">${s.getDate()}</span></div>
+      <div class="bigdate-main">
+        <p class="bigdate-title">${esc(ev.title)}</p>
+        <p class="bigdate-range">${range}</p>
+      </div>
+      <div class="bigdate-side">
+        <span class="countdown">${countdown(ev)}</span>
+        ${addLink(ev)}
+      </div>
+    </div>`;
+  }
+  document.getElementById("bigdates-card").innerHTML = big.length
+    ? big.map(bigRow).join("")
+    : `<div class="empty">No big dates on the horizon yet.</div>`;
+
+  // On your phone — subscribe to the school's own feeds
+  const FEED_BASE = "www.polyprep.org/sync/PolyCalendar.php?format=cal&exclude=false&event_type=";
+  const SUBS = [
+    { name: "All School",   desc: "Closures, key dates & schoolwide events", type: "All%20School" },
+    { name: "Lower School", desc: "Nursery through Grade 4 happenings",      type: "Lower%20School" },
+    { name: "Arts",         desc: "Plays, concerts & festivals",             type: "Arts" },
+  ];
+  document.getElementById("subscribe-card").innerHTML = SUBS.map((f, i) => {
+    const httpsUrl = `https://${FEED_BASE}${f.type}`;
+    const googleUrl = "https://calendar.google.com/calendar/r/settings/addbyurl?cid=" +
+      encodeURIComponent(`${httpsUrl}&provider=google`);
+    return `<div class="sub-row">
+      <div class="sub-main">
+        <p class="sub-name">${f.name}</p>
+        <p class="sub-desc">${f.desc}</p>
+      </div>
+      <div class="sub-actions">
+        <a class="btn btn--primary" href="webcal://${FEED_BASE}${f.type}">&#63743; Apple</a>
+        <a class="btn" href="${esc(googleUrl)}" target="_blank" rel="noopener">Google</a>
+        <button class="btn" type="button" data-copy="${esc(httpsUrl)}">Copy</button>
+      </div>
+    </div>`;
+  }).join("");
+  document.querySelectorAll("[data-copy]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const url = btn.getAttribute("data-copy");
+      try {
+        await navigator.clipboard.writeText(url);
+        const old = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = old; }, 1600);
+      } catch {
+        window.prompt("Copy this feed address:", url);
+      }
+    });
+  });
+
+  // ---- Weather & what to wear (Park Slope campus) ----
+  // Keep in sync with WX_URL in sync-poly.js
+  const WX_URL = "https://api.open-meteo.com/v1/forecast?latitude=40.6687&longitude=-73.9737" +
+    "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,snowfall_sum,wind_speed_10m_max,uv_index_max" +
+    "&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code" +
+    "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&forecast_days=7";
+
+  const WX_TEXT = {
+    0: "Clear", 1: "Mostly sunny", 2: "Partly cloudy", 3: "Cloudy", 45: "Foggy", 48: "Foggy",
+    51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle", 56: "Freezing drizzle", 57: "Freezing drizzle",
+    61: "Light rain", 63: "Rain", 65: "Heavy rain", 66: "Freezing rain", 67: "Freezing rain",
+    71: "Light snow", 73: "Snow", 75: "Heavy snow", 77: "Snow grains",
+    80: "Showers", 81: "Showers", 82: "Heavy showers", 85: "Snow showers", 86: "Heavy snow showers",
+    95: "Thunderstorms", 96: "Thunderstorms & hail", 99: "Thunderstorms & hail",
+  };
+  function wxKind(c) {
+    if (c >= 95) return "storm";
+    if ((c >= 71 && c <= 77) || c === 85 || c === 86) return "snow";
+    if (c >= 51) return "rain";
+    if (c === 45 || c === 48) return "fog";
+    if (c === 3) return "cloud";
+    if (c === 1 || c === 2) return "partly";
+    return "clear";
+  }
+
+  const CLOUD = "M16 36h18a7 7 0 0 0 0-14h-.5A10 10 0 0 0 14.2 24.6 6 6 0 0 0 16 36z";
+  function wxIcon(kind) {
+    const sun = (cx, cy, r) => {
+      const rays = [0, 45, 90, 135, 180, 225, 270, 315].map(a => {
+        const rad = a * Math.PI / 180, x = Math.cos(rad), y = Math.sin(rad);
+        return `<line x1="${cx + x * (r + 3)}" y1="${cy + y * (r + 3)}" x2="${cx + x * (r + 6.5)}" y2="${cy + y * (r + 6.5)}"/>`;
+      }).join("");
+      return `<g style="stroke:var(--today)"><circle cx="${cx}" cy="${cy}" r="${r}"/>${rays}</g>`;
+    };
+    const cloud = (dy = 0) =>
+      `<path d="${CLOUD}" transform="translate(0 ${dy})" style="stroke:var(--muted);fill:var(--panel)"/>`;
+    const below = {
+      rain: `<g style="stroke:var(--accent)"><line x1="18" y1="36" x2="16" y2="42"/><line x1="25" y1="36" x2="23" y2="42"/><line x1="32" y1="36" x2="30" y2="42"/></g>`,
+      snow: `<g style="fill:var(--accent);stroke:none"><circle cx="17" cy="39" r="1.8"/><circle cx="24" cy="42" r="1.8"/><circle cx="31" cy="39" r="1.8"/></g>`,
+      storm: `<polyline points="26,33 21,40 27,40 22,46" style="stroke:var(--today)"/>`,
+      fog: `<g style="stroke:var(--muted)"><line x1="12" y1="38" x2="36" y2="38"/><line x1="16" y1="43" x2="32" y2="43"/></g>`,
+    };
+    const body = {
+      clear: sun(24, 24, 8),
+      partly: sun(17, 17, 6) + cloud(2),
+      cloud: cloud(0),
+      rain: cloud(-6) + below.rain,
+      snow: cloud(-6) + below.snow,
+      storm: cloud(-8) + below.storm,
+      fog: cloud(-8) + below.fog,
+    }[kind];
+    return `<svg class="wx-icon" viewBox="0 0 48 48" fill="none" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+  }
+
+  function toISO(d) {
+    const p = x => String(x).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+  function wxDay(w, iso) {
+    const i = w.daily.time.indexOf(iso);
+    if (i === -1) return null;
+    const idx = {};
+    w.hourly.time.forEach((t, k) => { if (t.startsWith(iso)) idx[+t.slice(11, 13)] = k; });
+    const at = (h, key) => (idx[h] == null ? null : w.hourly[key][idx[h]]);
+    const schoolHours = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16].filter(h => idx[h] != null);
+    return {
+      iso,
+      code: schoolHours.length ? Math.max(...schoolHours.map(h => at(h, "weather_code"))) : w.daily.weather_code[i],
+      pop: schoolHours.length
+        ? Math.max(...schoolHours.map(h => at(h, "precipitation_probability") || 0))
+        : (w.daily.precipitation_probability_max[i] || 0),
+      hi: w.daily.temperature_2m_max[i],
+      lo: w.daily.temperature_2m_min[i],
+      snow: w.daily.snowfall_sum[i] || 0,
+      wind: w.daily.wind_speed_10m_max[i] || 0,
+      uv: w.daily.uv_index_max[i] || 0,
+      slots: [[8, "Drop-off"], [12, "Noon"], [15, "3 PM"]].map(([h, label]) =>
+        ({ label, t: at(h, "temperature_2m"), feels: at(h, "apparent_temperature") })),
+    };
+  }
+
+  // Kid-focused: dress for how drop-off feels, then adjust for the day ahead.
+  function wearAdvice(d) {
+    const am = d.slots[0].feels ?? d.lo;
+    const amAir = d.slots[0].t ?? d.lo;
+    const pm = d.slots[2].t ?? d.hi;
+    const kind = wxKind(d.code);
+    let lead;
+    if (am < 25) lead = "Full winter gear: puffy coat, hat, mittens & a scarf";
+    else if (am < 32) lead = "Winter coat, hat & mittens";
+    else if (am < 45) lead = "A warm jacket and a hat";
+    else if (am < 55) lead = "A light jacket or fleece over long sleeves";
+    else if (am < 65) lead = "A sweatshirt or light layer with long pants";
+    else if (am < 78) lead = "T-shirt weather, with pants or shorts";
+    else lead = "Shorts, a T-shirt & a full water bottle";
+    const extras = [];
+    if (kind === "snow" || d.snow > 0) extras.push("Snow boots & snow pants");
+    else if (d.pop >= 50 || kind === "storm" || (kind === "rain" && d.code >= 61)) extras.push("Rain jacket & rain boots");
+    else if (kind === "rain" || d.pop >= 30) extras.push(`Showers possible (${d.pop}%) — pack the rain jacket`);
+    if (kind === "storm") extras.push("Thunderstorms possible");
+    if (pm - amAir >= 12 && amAir < 62) extras.push(`Dress in layers — about ${Math.round(pm - amAir)}° warmer by 3 PM`);
+    if (d.wind >= 18) extras.push("Windy — a hood or windbreaker helps");
+    if (d.uv >= 6 && pm >= 70) extras.push("Sunscreen & a sun hat");
+    return { lead, extras };
+  }
+
+  function wxCard(d, when) {
+    const kind = wxKind(d.code);
+    const { lead, extras } = wearAdvice(d);
+    const deg = v => (v == null ? "–" : `${Math.round(v)}°`);
+    const slots = d.slots.map(s => `<div class="wx-slot">
+        <span class="h">${s.label}</span>
+        <span class="t">${deg(s.t)}</span>
+        ${s.t != null && s.feels != null && Math.abs(s.feels - s.t) >= 4
+          ? `<span class="f">feels ${deg(s.feels)}</span>` : ""}
+      </div>`).join("");
+    return `<div class="wx-day">
+      <div class="wx-top">
+        ${wxIcon(kind)}
+        <div>
+          <p class="wx-when">${when}</p>
+          <p class="wx-cond">${WX_TEXT[d.code] || "Mixed"}${d.pop >= 30 ? ` · ${d.pop}% rain` : ""}</p>
+        </div>
+        <div class="wx-temps">${deg(d.hi)} <span class="lo">/ ${deg(d.lo)}</span></div>
+      </div>
+      <div class="wx-strip">${slots}</div>
+      <div>
+        <p class="wx-lead"><span class="wear-label">Wear:</span> ${lead}</p>
+        ${extras.length ? `<ul class="wx-extras">${extras.map(x => `<li>${x}</li>`).join("")}</ul>` : ""}
+      </div>
+    </div>`;
+  }
+
+  function renderWeather(w, live) {
+    const section = document.getElementById("weather-section");
+    // Second card is the next weekday, so Friday and the weekend look ahead to Monday's drop-off
+    let next = addDays(today, 1);
+    while (next.getDay() === 0 || next.getDay() === 6) next = addDays(next, 1);
+    const isTomorrow = next.getTime() === tomorrow.getTime();
+    const cards = [
+      [wxDay(w, toISO(today)), "Today"],
+      [wxDay(w, toISO(next)), isTomorrow ? "Tomorrow" : fmt(next, { weekday: "long" })],
+    ].filter(([d]) => d);
+    if (!cards.length) { section.hidden = true; return; }
+    document.getElementById("weather-card").innerHTML = cards.map(([d, when]) => wxCard(d, when)).join("");
+    const asOf = new Date(w.fetched);
+    document.getElementById("weather-sub").textContent = live
+      ? "Park Slope · live forecast"
+      : `Park Slope · as of ${asOf.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
+    section.hidden = false;
+  }
+
+  async function loadLiveWeather() {
+    try {
+      const res = await fetch(WX_URL);
+      if (!res.ok) return;
+      const j = await res.json();
+      renderWeather({ fetched: new Date().toISOString(), daily: j.daily, hourly: j.hourly }, true);
+    } catch {
+      // Sandboxed viewers (like claude.ai) block outside requests; the snapshot stays up.
+    }
+  }
+  if (WEATHER_SNAPSHOT) renderWeather(WEATHER_SNAPSHOT, false);
+  loadLiveWeather();
+  setInterval(loadLiveWeather, 30 * 60 * 1000);
+</script>
+</body>
+</html>
